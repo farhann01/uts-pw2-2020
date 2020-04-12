@@ -33,15 +33,22 @@ class ProdukController extends Controller
         ];
 
         //kemudian tampilkan dalam view
+        return view('index' , ['produk' => $produk]);
     }
     
-    public function tambah()
+    public function tambah(Request $request)
     {
-        // tampilkan form seperti yang ada di template
+        $add_data = [
+            'nama_produk' => $request['nama-produk'],
+            'kategori' => $request['kategori'],
+            'harga' => $request['harga'],
+        ];
+        return redirect()->route('success')->with(['add_data' => $add_data]);
     }
 
     public function detail()
     {
-        // tampilkan halaman success seperti yang ada di template
+        $add_data = session()->get('add_data');
+        return view('success' , ['add_data' => $add_data]);
     }
 }
